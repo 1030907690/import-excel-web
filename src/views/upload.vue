@@ -36,10 +36,10 @@ export default {
       uploadUrl: this.$config.getBaseUrl() + "/importVue",
       formObj: "",
       isXlsx: false,
+       
     };
   },
-  created() {
-  },
+  created() {},
   methods: {
     // 发送请求前进入的方法
     uploadSectionFile(param) {
@@ -49,6 +49,12 @@ export default {
       let vm = this;
       vm.formObj = new FormData();
 
+      const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+      //   background: 'rgba(0, 0, 0, 0.7)'
+        });
       this.$axios({
         method: "post",
         url: this.uploadUrl,
@@ -70,6 +76,7 @@ export default {
             message: res.data.description,
           });
         }
+        loading.close();
       });
       vm.$refs.upload.submit();
     },
