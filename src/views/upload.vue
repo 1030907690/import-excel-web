@@ -33,10 +33,12 @@ export default {
   data() {
     return {
       fileList: [],
-      uploadUrl: "http://localhost:8081/api/importVue",
+      uploadUrl: this.$config.getBaseUrl() + "/importVue",
       formObj: "",
       isXlsx: false,
     };
+  },
+  created() {
   },
   methods: {
     // 发送请求前进入的方法
